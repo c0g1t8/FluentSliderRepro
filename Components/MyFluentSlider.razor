@@ -1,0 +1,9 @@
+﻿@inherits FluentSlider<TValue>
+@typeparam TValue
+@attribute [CascadingTypeParameter(nameof(TValue))]
+
+<div @ref=container>
+    @{
+        base.BuildRenderTree(__builder);
+    }
+</div>
