@@ -1,0 +1,34 @@
+﻿@page "/Problem"
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<FluentGrid Style="width:100%">
+    <FluentGridItem xs="12">
+        <h1>Related Sliders</h1>
+    </FluentGridItem>
+    <FluentGridItem xs="2" Justify="JustifyContent.FlexEnd">From Month</FluentGridItem>
+    <FluentGridItem xs="4">
+        <FluentSlider Step="1" Min="1" Max="EndMonth" @bind-Value="StartMonth">
+            @foreach (var sy in GetCollection(1, EndMonth))
+            {
+                <FluentSliderLabel Position="@sy">@sy</FluentSliderLabel>
+            }
+        </FluentSlider>
+    </FluentGridItem>
+    <FluentGridItem xs="2" Justify="JustifyContent.FlexEnd">To Month</FluentGridItem>
+    <FluentGridItem xs="4">
+        <FluentSlider Step="1" Min="StartMonth" Max="12" @bind-Value="EndMonth">
+            @foreach (var sy in GetCollection(StartMonth, 12))
+            {
+                <FluentSliderLabel Position="@sy">@sy</FluentSliderLabel>
+            }
+        </FluentSlider>
+    </FluentGridItem>
+</FluentGrid>
+@code {
+    private int StartMonth = 1;
+    private int EndMonth = 12;
+
+    public IEnumerable<int> GetCollection(int start, int end) => Enumerable.Range(start, end - start + 1);
+}
